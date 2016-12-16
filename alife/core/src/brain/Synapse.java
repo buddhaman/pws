@@ -6,3 +6,4 @@ public class Synapse {
 	public float update;
 	public int from;
 }
+

@@ -55,7 +55,7 @@ public class World {
 		for(int i = 0; i < tWidth; i++) {
 			for(int j = 0; j < tHeight; j++) {
 				int type = (i==0 || i==tWidth-1 || j == 0 || j==tHeight-1) ? Tile.TYPE_STONE : Tile.TYPE_EMPTY;
-				tiles[i+j*tWidth] = new Tile(type, MathUtils.random(400, 600));
+				tiles[i+j*tWidth] = new Tile(type, MathUtils.random(400, 400));
 			}
 		}
 	}

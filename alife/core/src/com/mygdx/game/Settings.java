@@ -74,8 +74,8 @@ public class Settings {
 		settings.tileSize = new FloatProperty(8f);
 		settings.tWidth = new IntProperty(60);
 		settings.tHeight = new IntProperty(40);
-		settings.bodyRecursionLimit = new IntProperty(3);
-		settings.bodyMaxNodes = new IntProperty(8);
+		settings.bodyRecursionLimit = new IntProperty(5);
+		settings.bodyMaxNodes = new IntProperty(16);
 		settings.nodeMaxConnections = new IntProperty(3);
 		settings.nodeMutationProb = new FloatProperty(.01f);
 		settings.nodeMutationRate = new FloatProperty(.1f);
@@ -104,13 +104,13 @@ public class Settings {
 		settings.dayNightCycles = false;
 		settings.onlineEvolution = false;
 		settings.eatPlantFactor = new IntProperty(15);
-		settings.eatCorpseFactor = new IntProperty(120);
-		settings.attackStrength = new IntProperty(3);
+		settings.eatCorpseFactor = new IntProperty(10);
+		settings.attackStrength = new IntProperty(14);
 		settings.turningSpeed = new FloatProperty(.2f);
 		settings.movingSpeed = new FloatProperty(.15f);
 		settings.friction = new FloatProperty(.64f);
 		
-		settings.matingProb = new FloatProperty(.55f);
+		settings.matingProb = new FloatProperty(0f);
 		settings.spikesAttraction = new FloatProperty(.4f);
 		settings.eyesAttraction = new FloatProperty(1);
 		settings.bodySizeAttraction = new FloatProperty(.2f);

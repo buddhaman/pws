@@ -50,6 +50,7 @@ public class SeedSystem extends EntitySystem {
 				Tile t = simulation.world.getTileAt(pos.x, pos.y);
 				t.energy+=seedComponent.energy;
 				simulation.removeEntity(seed);
+				return;
 			}
 			
 				

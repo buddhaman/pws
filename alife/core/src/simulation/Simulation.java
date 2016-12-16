@@ -26,6 +26,7 @@ import renderer.Resources;
 import system.BotSystem;
 import system.CameraSystem;
 import system.CorpseSystem;
+import system.EnergySystem;
 import system.EvolutionSystem;
 import system.KeyInputSystem;
 import system.Mappers;
@@ -93,6 +94,7 @@ public class Simulation implements EntityListener {
 		engine.addSystem(new MovementSystem(this));
 		engine.addSystem(new PhysicsSystem(this));
 		engine.addSystem(new CameraSystem(this));
+		engine.addSystem(new EnergySystem(this));
 		
 		
 		camera = Factory.createCamera(worldWidth/2, worldHeight/2, 8);

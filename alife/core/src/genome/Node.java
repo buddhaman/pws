@@ -95,7 +95,7 @@ public class Node {
 	
 	public float mutateFloat(float g, float mutationProb, float mutationRate, float min, float max) {
 		if(MathUtils.random() < mutationProb) {
-			float val = g + MathUtils.random()*mutationRate;
+			float val = g + MathUtils.random(-mutationRate, mutationRate);
 			if(val > max) val = 2*max-val;		//wraparound
 			if(val < min) val = 2*min-val;
 			return val;
@@ -106,7 +106,7 @@ public class Node {
 	public void mutateFloatArray(float[] gene, float min, float max, float mutationRate, float mutationProb) {
 		for(int i = 0; i < gene.length; i++) {
 			if(MathUtils.random() < mutationProb) {
-				float val = gene[i] + MathUtils.random()*mutationRate;
+				float val = gene[i] + MathUtils.random(-mutationRate, mutationRate);
 				//wraparound
 				if(val < min) {
 					val+=(max-min);
