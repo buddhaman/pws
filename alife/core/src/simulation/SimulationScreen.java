@@ -50,6 +50,9 @@ public class SimulationScreen implements Screen, Resources {
 
 	public Simulation simulation;
 	private boolean simulationRunning;
+	
+	//properties
+	public int maxIterationsPerFrame = 250;
 
 	// ui stuff
 	public Table mainTable;
@@ -143,7 +146,7 @@ public class SimulationScreen implements Screen, Resources {
 		});
 
 		upsLabel = new Label("", skin);
-		slider = new Slider(1, 500, 1, false, skin);
+		slider = new Slider(1, maxIterationsPerFrame, 1, false, skin);
 		mainTable.top().add(upsLabel).right();
 		mainTable.add(slider).width(300).center();
 

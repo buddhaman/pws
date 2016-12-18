@@ -71,7 +71,7 @@ public class Settings {
 	}
 	
 	public static void setDefault(Settings settings) {
-		settings.tileSize = new FloatProperty(8f);
+		settings.tileSize = new FloatProperty(14f);
 		settings.tWidth = new IntProperty(60);
 		settings.tHeight = new IntProperty(40);
 		settings.bodyRecursionLimit = new IntProperty(5);
