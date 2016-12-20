@@ -32,6 +32,15 @@ public class PWS extends Game implements PWSContainer {
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
 
+		/*		USE THIS IF ON YOHFDH
+		 * atlas = new TextureAtlas(Gdx.files.internal("/Users/<NAME>/Desktop/evolutie/pws/alife/core/assets/uiskin.atlas"));
+		simulationAtlas = new TextureAtlas(Gdx.files.internal("/Users/<NAME>/Desktop/evolutie/pws/alife/core/assets/spritesheet.pack"));
+		
+		//define fonts
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("/Users/timtrussner/Desktop/evolutie/pws/alife/core/assets/Arial Unicode.ttf"));
+		
+		 */
+		
 		atlas = new TextureAtlas(Gdx.files.internal("uiskin.atlas"));
 		simulationAtlas = new TextureAtlas(Gdx.files.internal("spritesheet.pack"));
 		
