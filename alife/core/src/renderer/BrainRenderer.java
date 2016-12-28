@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Array;
 
 import creature.CreatureBody;
 
-
 public class BrainRenderer extends Renderer {
 	
 	private AtlasRegion circleRegion;
