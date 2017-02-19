@@ -13,6 +13,7 @@ public class CreatureLibrary {
 
 	Json json;
 	public static final String CREATURE_FOLDER = "savedCreatures";
+	public static final String EXPERIMENT_FOLDER = "evoExperiments";
 	FileHandle creatureFolder;
 	
 	private List<String> creatureNameList = new ArrayList<String>();
@@ -55,6 +56,15 @@ public class CreatureLibrary {
 	public void saveGenome(Genome genome, String name) {
 		FileHandle file = Gdx.files.local("/"+CREATURE_FOLDER+"/"+name+".json");
 		file.writeString(json.toJson(genome), false);
+	}
+	
+	public void saveExperimentData(ExperimentData data, String name) {
+		FileHandle file = Gdx.files.local("/"+EXPERIMENT_FOLDER+"/"+name+".json");
+		file.writeString(json.toJson(data), false);
+	}
+	
+	public ExperimentData loadExperimentData(FileHandle handle) {
+		return json.fromJson(ExperimentData.class, handle);
 	}
 
 	public List<String> getNames() {

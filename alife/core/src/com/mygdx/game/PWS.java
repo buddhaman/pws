@@ -12,6 +12,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
+import console.CommandListener;
+import console.Console;
+import console.Console.Type;
 import simulation.SimulationScreen;
 
 public class PWS extends Game implements PWSContainer {
@@ -27,6 +30,10 @@ public class PWS extends Game implements PWSContainer {
 	
 	@Override
 	public void create () {
+
+		//start the console
+		new Thread(new Console()).start();
+		
 		batch = new SpriteBatch();
 		
 		width = Gdx.graphics.getWidth();
@@ -65,7 +72,32 @@ public class PWS extends Game implements PWSContainer {
 		
 		settings = Settings.getDefault();
 		this.setScreen(new SimulationScreen(this));
-	}	
+		addCommands();
+	}
+	
+	/**
+	 * add some commands for setting settings
+	 */
+	public void addCommands() {
+		Console.createCommand("setWorldWidth", Type.INT, new CommandListener(){
+			public void executed(int arg) {
+				System.out.println("world width is now " + arg);
+				Settings.getCurrent().tWidth.val = arg;
+			}
+		});
+		Console.createCommand("setWorldHeight", Type.INT, new CommandListener(){
+			public void executed(int arg) {
+				System.out.println("world height is now " + arg);
+				Settings.getCurrent().tHeight.val = arg;
+			}
+		});
+		Console.createCommand("setTileSize", Type.FLOAT, new CommandListener(){
+			public void executed(float arg) {
+				System.out.println("tile size is now " + arg);
+				Settings.getCurrent().tileSize.val = arg;
+			}
+		});
+	}
 	
 	public void startSimulation() {
 		this.setScreen(new SimulationScreen(this));

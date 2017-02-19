@@ -63,6 +63,9 @@ public class CreatureBody {
 	public CreatureBody matingTarget;
 	public boolean isTarget;
 	public Array<PlantNode> seeds = new Array<PlantNode>();
+	
+	//hashmap storing plant type and amount eaten;
+	public HashMap<PlantNode, Float> plantsEaten = new HashMap<PlantNode, Float>();
 		
 	public CreatureBody(Genome genome) {
 		this.genome = genome;
@@ -372,7 +375,6 @@ public class CreatureBody {
 	public void addEnergy(int energy) {
 		this.energy+=energy;
 		totalEnergyCollected+=energy;
-		health+=energy;
 		fitness+=energy;
 	}
 	
@@ -382,8 +384,7 @@ public class CreatureBody {
 	}
 	
 	public void eat(int energy) {
-		health+=energy;
-		this.energy+=energy;
+		addEnergy(energy);
 	}
 	
 	public String getInfo() {

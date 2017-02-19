@@ -53,7 +53,6 @@ public class SeedSystem extends EntitySystem {
 				return;
 			}
 			
-				
 			if (seedComponent.ticksAlive % Seed.TICKS_PER_ENERGY_UNIT == 0) {
 				Vector2 pos = physM.get(seed).group.circleList.get(0).particle.pos;
 				Tile t = simulation.world.getTileAt(pos.x, pos.y);

@@ -31,7 +31,7 @@ public class Factory {
 		t.y=y;
 		camera.add(t);
 		CameraComponent camComponent = new CameraComponent();
-		camComponent.zoom = .05f;
+		camComponent.zoom = zoom;
 		camComponent.cam = new OrthographicCamera();
 		camera.add(camComponent);
 		camera.add(new InputMovement());

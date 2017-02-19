@@ -3,6 +3,10 @@ package com.mygdx.game;
 public class IntProperty extends Property {
 	public int val;
 	
+	public IntProperty() {
+		
+	}
+	
 	public IntProperty(int val) {
 		this.val = val;
 	}

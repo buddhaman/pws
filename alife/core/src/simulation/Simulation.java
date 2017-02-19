@@ -28,6 +28,7 @@ import system.CameraSystem;
 import system.CorpseSystem;
 import system.EnergySystem;
 import system.EvolutionSystem;
+import system.ExperimentSystem;
 import system.KeyInputSystem;
 import system.Mappers;
 import system.MovementSystem;
@@ -66,16 +67,17 @@ public class Simulation implements EntityListener {
 	public int stopAtDays = Integer.MAX_VALUE;
 	
 	//camera handling
-	private Entity camera;
+	public Entity camera;
 
 	public boolean onlineEvolution;
 
 	private boolean running;
 	public boolean hasSimulationTime = false;
+	public boolean experimentRunning = false;
 	
-	public Simulation(Settings settings) {
+	public Simulation(Settings settings, boolean experiment) {
 		updateSettings(settings);
-	
+		this.experimentRunning = experiment;
 		//setup engine
 		engine = new Engine();
 
@@ -86,6 +88,7 @@ public class Simulation implements EntityListener {
 		engine.addEntityListener(this);
 		
 		engine.addSystem(new KeyInputSystem(this));
+		engine.addSystem(new ExperimentSystem(this));
 		engine.addSystem(new BotSystem(this));
 		engine.addSystem(new EvolutionSystem(this));
 		engine.addSystem(new PlantSystem(this));
@@ -97,7 +100,7 @@ public class Simulation implements EntityListener {
 		engine.addSystem(new EnergySystem(this));
 		
 		
-		camera = Factory.createCamera(worldWidth/2, worldHeight/2, 8);
+		camera = Factory.createCamera(worldWidth/2, worldHeight/2, .5f);
 		addEntity(camera);
 		
 		for(int i = 0; i < 20; i++) {
@@ -119,7 +122,6 @@ public class Simulation implements EntityListener {
 			t.energy-=Plant.MIN_ENERGY;
 			addEntity(Factory.createPlant(pg, pos.x, pos.y));
 		}
-	
 	}
 	
 	public void updateSettings(Settings settings) {		
@@ -165,11 +167,6 @@ public class Simulation implements EntityListener {
 		timeStep(d);
 	}
 	
-	public void botDead(CreatureBody creature) {
-		genePool.creatureDead(creature);
-		addEntity(Factory.createCorpse(creature));
-	}
-	
 	public void timeStep(float d) {
 		engine.update(d);
 		if(!running)
@@ -202,7 +199,7 @@ public class Simulation implements EntityListener {
 	}
 	
 	public String getTime() {
-		return String.format("T:%d S:%d M:%d H:%d D:%d", ticks, seconds, minutes, hours, days);
+		return String.format("D:%d H:%d M:%d S:%d T:%d", days, hours, minutes, seconds, ticks);
 	}
 	
 	public void addEntity(Entity entity) {
@@ -303,7 +300,14 @@ public class Simulation implements EntityListener {
 			addEntity(Factory.createBot(genePool.getRandomGenome(this), pos.x, pos.y));
 		}
 	}
-
+	
+	public void botDead(Bot bot) {
+		ExperimentSystem exp = engine.getSystem(ExperimentSystem.class);
+		if(exp!=null) {
+			exp.addDeadBot(bot);
+		}
+	}
+	
 	public float getCameraX() {
 		return Mappers.transformMapper.get(camera).x;
 	}
@@ -314,5 +318,12 @@ public class Simulation implements EntityListener {
 	
 	public void setCamCanMove(boolean canMove) {
 		Mappers.cameraComponentMapper.get(camera).canMove = canMove;
+	}
+
+	public void setExperimentListener(ExperimentListener listener) {
+		ExperimentSystem exp = engine.getSystem(ExperimentSystem.class);
+		if(exp!=null) {
+			exp.addExperimentListener(listener);
+		}
 	}
 }

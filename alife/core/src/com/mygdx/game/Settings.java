@@ -60,7 +60,9 @@ public class Settings {
 	public IntProperty rayNum;
 
 	public FloatProperty rayLength;
-
+	
+	//experiment properties
+	public IntProperty nExperiments;
 	
 	public static Settings getCurrent() {
 		return currentSettings;
@@ -111,13 +113,14 @@ public class Settings {
 		settings.friction = new FloatProperty(.64f);
 		
 		settings.matingProb = new FloatProperty(0f);
-		settings.spikesAttraction = new FloatProperty(.4f);
-		settings.eyesAttraction = new FloatProperty(1);
-		settings.bodySizeAttraction = new FloatProperty(.2f);
-		settings.brainSizeAttraction = new FloatProperty(.1f);
+		settings.spikesAttraction = new FloatProperty(0);
+		settings.eyesAttraction = new FloatProperty(0);
+		settings.bodySizeAttraction = new FloatProperty(0);
+		settings.brainSizeAttraction = new FloatProperty(0);
 		settings.energyCollectedAttraction = new FloatProperty(.004f);
 		
 		settings.rayLength = new FloatProperty(50);
+		settings.nExperiments = new IntProperty(10);
 	}
 	
 	public static Settings getDefault() {
