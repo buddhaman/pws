@@ -9,6 +9,8 @@ public class Tile {
 	public static final int TYPE_EMPTY = 0;
 	public static final int TYPE_STONE = 1;
 	
+	public static final float ENERGY_DENSITY = 2;
+	
 	public Material[] materials = new Material[]{null, Material.getMaterial(Material.STONE)};
 	
 	public Array<Circle> circleList = new Array<Circle>();

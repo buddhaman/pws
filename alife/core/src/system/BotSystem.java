@@ -62,15 +62,22 @@ public class BotSystem extends IteratingSystem {
 
 		if (creature.isDead()) {
 			simulation.removeEntity(entity);
-			simulation.botDead(creature);
+			botDead(creature);
+			simulation.botDead(bot);
 			dropSeed(creature, pos.x, pos.y);
 			return;
 		}
+		
 		// drop seeds
 		// randomly drop seeds once every 16 seconds
 		if (creature.ticksAlive % (60 * 16) == 0) {
 			dropSeed(creature, pos.x + .1f, pos.y + .1f);
 		}
+	}
+	
+	private void botDead(CreatureBody creature) {
+		simulation.genePool.creatureDead(creature);
+		simulation.addEntity(Factory.createCorpse(creature));
 	}
 	
 	private void updateMetabolism(CreatureBody creature) {
@@ -199,6 +206,11 @@ public class BotSystem extends IteratingSystem {
 			int energy = Math.min((int) creature.eatPlantFactor, pc.energy);
 			pc.energy -= energy;
 			creature.eat(energy);
+			if(simulation.experimentRunning) {
+				float eaten = creature.plantsEaten.containsKey(pc.genome) ? 
+						creature.plantsEaten.get(pc.genome) : 0;
+				creature.plantsEaten.put(pc.genome, eaten+energy);
+			}
 		}
 	}
 

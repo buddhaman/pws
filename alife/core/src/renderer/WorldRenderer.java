@@ -51,7 +51,7 @@ public class WorldRenderer extends Renderer {
 				if(t.type==Tile.TYPE_STONE) {
 					batch.setColor(Color.BLUE);
 				} else {
-					float tint = .3f+MathUtils.clamp(t.energy/(3000f), 0, .7f);
+					float tint = .3f+MathUtils.clamp(t.energy/(10*world.tileSize*world.tileSize), 0, .7f);
 					batch.setColor(tint,tint,tint,1);
 				}
 				batch.draw(blankRegion, i*world.tileSize, j*world.tileSize, world.tileSize, world.tileSize);

@@ -88,7 +88,6 @@ public class RenderSystem extends EntitySystem{
 		Entity camera = cameraArray.get(0);
 		CameraComponent camComponent = camM.get(camera);
 		batch.setProjectionMatrix(camComponent.cam.combined);
-			
 		batch.begin();
 		
 		worldRenderer.render(simulation, camera);

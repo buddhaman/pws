@@ -53,4 +53,27 @@ public class PlantNode {
 		hasSeed = MathUtils.random()<rate ? !hasSeed : hasSeed;
 		edible = MathUtils.clamp(edible+MathUtils.random(-rate,rate), 0, 1);
 	}
+	
+	/**
+	 * for saving the file
+	 */
+	public void removeRecursion() {
+		this.base = null;
+		for(PlantNode node : leafs) {
+			node.removeRecursion();
+		}
+	}
+	
+	/**
+	 * when loading file
+	 */
+	public void addRecursion(PlantNode base) {
+		if(base==this)
+			this.base = null;
+		else
+			this.base = base;
+		for(PlantNode node : leafs) {
+			node.addRecursion(base);
+		}
+	}
 }

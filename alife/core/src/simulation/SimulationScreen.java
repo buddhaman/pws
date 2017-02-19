@@ -33,6 +33,9 @@ import com.mygdx.game.Settings;
 
 import component.Bot;
 import component.Physics;
+import console.CommandListener;
+import console.Console;
+import console.Console.Type;
 import creature.Actuator;
 import creature.CreatureBody;
 import creature.Sensor;
@@ -49,7 +52,6 @@ import system.Mappers;
 public class SimulationScreen implements Screen, Resources {
 
 	public Simulation simulation;
-	private boolean simulationRunning;
 	
 	//properties
 	public int maxIterationsPerFrame = 250;
@@ -109,6 +111,7 @@ public class SimulationScreen implements Screen, Resources {
 	public TextButton loadButton;
 	public TextButton showSettingsButton;
 	protected TextField nameField;
+	public Experiment experiment;
 
 	public SimulationScreen(PWSContainer container) {
 		this.container = container;
@@ -119,12 +122,26 @@ public class SimulationScreen implements Screen, Resources {
 		brainRenderer = new BrainRenderer(this);
 		
 		creatureLibrary = new CreatureLibrary();
-		
 		Settings.setCurrent(container.getSettings());
-		simulation = new Simulation(container.getSettings());
-		simulation.setResources(this);
-		simulationRunning = true;
+		
+		setupExperiment();
 		initUI();
+		addCommands();
+	}
+	
+	public void addCommands() {
+		Console.createCommand("simRestart", Type.NONE, new CommandListener(){
+			public void executed() {
+				System.out.println("starting new simulation ");
+				startSimulation(false);
+			}
+		});
+	}
+	
+	public void startSimulation(boolean experiment) {
+		simulation = new Simulation(container.getSettings(), experiment);
+		simulation.setResources(this);
+		simulation.resize(screenWidth, screenHeight);
 	}
 
 	public void initUI() {
@@ -278,10 +295,7 @@ public class SimulationScreen implements Screen, Resources {
 		leftTable.add(settingsPane).colspan(3).width(settingsPaneWidth);
 		applyButton.addListener(new ChangeListener() {
 			public void changed(ChangeEvent event, Actor actor) {
-				for (SliderHandler sh : sliderHandlerArray) {
-					sh.update();
-				}
-				simulation.updateSettings(Settings.getCurrent());
+				applyChanges();
 			}
 		});
 
@@ -331,6 +345,17 @@ public class SimulationScreen implements Screen, Resources {
 			}
 		});
 		settingsPane.add(addCreatureButton);
+	}
+	
+	public void applyChanges() {
+		if(simulation.experimentRunning) {
+			//TODO: make popup
+			System.out.println("are you sure you want to stop the experiment?");
+		}
+		for (SliderHandler sh : sliderHandlerArray) {
+			sh.update();
+		}
+		simulation.updateSettings(Settings.getCurrent());
 	}
 	
 	public void updateLoadTable() {
@@ -658,5 +683,9 @@ public class SimulationScreen implements Screen, Resources {
 		public void update() {
 			property.set(s.getValue());
 		}
+	}
+	
+	public void setupExperiment() {
+		this.experiment = new Experiment(this);
 	}
 }

@@ -52,10 +52,11 @@ public class World {
 		tDiagonal = (int)Math.sqrt(tWidth*tWidth+tHeight*tHeight);
 		
 		tiles = new Tile[tWidth*tHeight];
+		int energyPerTile = (int)(Tile.ENERGY_DENSITY*tileSize*tileSize);
 		for(int i = 0; i < tWidth; i++) {
 			for(int j = 0; j < tHeight; j++) {
 				int type = (i==0 || i==tWidth-1 || j == 0 || j==tHeight-1) ? Tile.TYPE_STONE : Tile.TYPE_EMPTY;
-				tiles[i+j*tWidth] = new Tile(type, MathUtils.random(400, 400));
+				tiles[i+j*tWidth] = new Tile(type, energyPerTile);
 			}
 		}
 	}
@@ -68,7 +69,7 @@ public class World {
 		}
 		
 		//selecteer random tiles die energie naar elkaar vloeien
-		int n = tWidth;
+		int n = tWidth*2;
 		int flow = 2;
 		for(int i = 0; i < n; i++) {
 			int x = MathUtils.random(tWidth-1);

@@ -1,0 +1,68 @@
+
+spritesheet.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+plant
+  rotate: false
+  xy: 1, 163
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+circle
+  rotate: false
+  xy: 323, 227
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+heart
+  rotate: false
+  xy: 581, 283
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+pijl
+  rotate: false
+  xy: 783, 283
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+jawLeft
+  rotate: false
+  xy: 1, 1
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+jawRight
+  rotate: false
+  xy: 163, 1
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+oog
+  rotate: false
+  xy: 325, 65
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+spike
+  rotate: false
+  xy: 487, 65
+  size: 160, 160
+  orig: 160, 160
+  offset: 0, 0
+  index: -1
+blankRegion
+  rotate: false
+  xy: 985, 479
+  size: 4, 4
+  orig: 4, 4
+  offset: 0, 0
+  index: -1

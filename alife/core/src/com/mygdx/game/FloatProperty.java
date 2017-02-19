@@ -3,6 +3,10 @@ package com.mygdx.game;
 public class FloatProperty extends Property {
 	public float val;
 	
+	public FloatProperty() {
+		
+	}
+	
 	public FloatProperty(float val) {
 		this.val = val;
 	}
