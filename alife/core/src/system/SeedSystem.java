@@ -13,6 +13,7 @@ import component.Physics;
 import component.Plant;
 import component.Seed;
 import entity.Factory;
+import genome.PlantNode;
 import physics.Tile;
 import simulation.Simulation;
 
@@ -40,7 +41,6 @@ public class SeedSystem extends EntitySystem {
 			Seed seedComponent = seedM.get(seed);
 			seedComponent.ticksAlive++;
 			
-
 			if(seedComponent.eaten) {
 				simulation.removeEntity(seed);
 				return;
@@ -62,7 +62,8 @@ public class SeedSystem extends EntitySystem {
 					seedComponent.energy++;
 				}
 				if (seedComponent.energy >= Seed.ENERGY_THRESHOLD) {
-					simulation.addEntity(Factory.createPlant(seedComponent.plantGenome, pos.x, pos.y));
+					float mutation = Settings.getCurrent().plantMutationFactor.val;
+					simulation.addEntity(Factory.createPlant(new PlantNode(seedComponent.plantGenome,mutation), pos.x, pos.y));
 					simulation.removeEntity(seed);
 					t.energy+=(seedComponent.energy-Plant.MIN_ENERGY);
 				}

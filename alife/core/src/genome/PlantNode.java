@@ -47,9 +47,9 @@ public class PlantNode {
 	}
 	
 	public void mutate(float rate) {
-		r = MathUtils.clamp(r+MathUtils.random(-rate, rate), 0, 1);
-		g = MathUtils.clamp(g+MathUtils.random(-rate, rate), 0, 1);
-		b = MathUtils.clamp(b+MathUtils.random(-rate, rate), 0, 1);
+		r = MathUtils.clamp(r+MathUtils.random(-rate*2, rate*2), 0, 1);
+		g = MathUtils.clamp(g+MathUtils.random(-rate*2, rate*2), 0, 1);
+		b = MathUtils.clamp(b+MathUtils.random(-rate*2, rate*2), 0, 1);
 		hasSeed = MathUtils.random()<rate ? !hasSeed : hasSeed;
 		edible = MathUtils.clamp(edible+MathUtils.random(-rate,rate), 0, 1);
 	}

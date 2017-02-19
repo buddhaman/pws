@@ -67,6 +67,8 @@ public class Settings {
 	public IntProperty nGenerations;
 
 	public IntProperty minPlants;
+
+	public FloatProperty plantMutationFactor;
 	
 	public static Settings getCurrent() {
 		return currentSettings;
@@ -128,6 +130,7 @@ public class Settings {
 		settings.nExperiments = new IntProperty(6);
 		settings.nGenerations = new IntProperty(200);
 		settings.spawnSeedProb = new FloatProperty(.7f);
+		settings.plantMutationFactor = new FloatProperty(.002f);
 	}
 	
 	public static Settings getDefault() {
