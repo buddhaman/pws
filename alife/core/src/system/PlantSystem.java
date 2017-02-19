@@ -95,7 +95,18 @@ public class PlantSystem extends EntitySystem {
 			PlantNode node = plantComponent.genome;
 			if(canReproduce(plantComponent)) {
 				Array<PlantNode> leafGenes = node.leafs;
-				if(node.leafs.size>plantComponent.leafs.size) {
+				
+				//boolean  check if all child nodes are fully grown
+				boolean canProduceNewLeaf = true;
+				for(int i = 0; i < plantComponent.leafs.size; i++) {
+					Plant leaf = plantComponent.leafs.get(i);
+					if(leaf.energy < Plant.MAX_ENERGY) {
+						canProduceNewLeaf = false;
+						break;
+					}
+				}
+				
+				if(node.leafs.size>plantComponent.leafs.size && canProduceNewLeaf) {
 					PlantNode next = nextNode(leafGenes, plantComponent.leafs);
 					Entity nPlant = Factory.createPlant(next, pos.x+MathUtils.random(-.1f,.1f), pos.y+MathUtils.random(-.1f, .1f));
 					plantComponent.energy-=Plant.MIN_ENERGY;
