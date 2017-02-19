@@ -13,6 +13,7 @@ public class Settings {
 	
 	public FloatProperty newPlantProb;
 	public FloatProperty plantGrowProb;
+	public FloatProperty spawnSeedProb;
 	
 	public IntProperty bodyRecursionLimit;
 	public IntProperty bodyMaxNodes;
@@ -63,6 +64,9 @@ public class Settings {
 	
 	//experiment properties
 	public IntProperty nExperiments;
+	public IntProperty nGenerations;
+
+	public IntProperty minPlants;
 	
 	public static Settings getCurrent() {
 		return currentSettings;
@@ -93,6 +97,7 @@ public class Settings {
 		
 		settings.botPopulation = new IntProperty(100);
 		settings.minBots = new IntProperty(20);
+		settings.minPlants = new IntProperty(1);
 		
 		settings.maxMouths = new IntProperty(3);
 		settings.maxSpikes = new IntProperty(4);
@@ -120,7 +125,9 @@ public class Settings {
 		settings.energyCollectedAttraction = new FloatProperty(.004f);
 		
 		settings.rayLength = new FloatProperty(50);
-		settings.nExperiments = new IntProperty(10);
+		settings.nExperiments = new IntProperty(6);
+		settings.nGenerations = new IntProperty(200);
+		settings.spawnSeedProb = new FloatProperty(.7f);
 	}
 	
 	public static Settings getDefault() {

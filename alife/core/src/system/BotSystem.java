@@ -207,9 +207,10 @@ public class BotSystem extends IteratingSystem {
 			pc.energy -= energy;
 			creature.eat(energy);
 			if(simulation.experimentRunning) {
-				float eaten = creature.plantsEaten.containsKey(pc.genome) ? 
-						creature.plantsEaten.get(pc.genome) : 0;
-				creature.plantsEaten.put(pc.genome, eaten+energy);
+				PlantNode base = pc.genome.base==null ? pc.genome : pc.genome.base;
+				float eaten = creature.plantsEaten.containsKey(base) ? 
+						creature.plantsEaten.get(base) : 0;
+				creature.plantsEaten.put(base, eaten+energy);
 			}
 		}
 	}

@@ -39,9 +39,9 @@ public class PlantSystem extends EntitySystem {
 
 	@Override
 	public void update(float deltaTime) {
-
+		Settings settings = Settings.getCurrent();
 		
-		if(PlantArray.size() < 30) {
+		if(PlantArray.size() < settings.minPlants.val) {
 			simulation.addPlant();
 		}
 		for (int m = PlantArray.size()-1; m >= 0; m--) {
@@ -56,7 +56,7 @@ public class PlantSystem extends EntitySystem {
 			if (plantComponent.energy <= 0 || plantComponent.ticksAlive > Plant.MAX_TICKS_ALIVE) {
 				simulation.removeEntity(plant);
 				t.energy+=plantComponent.energy;
-				if(plantComponent.genome.hasSeed) {
+				if(plantComponent.genome.hasSeed && MathUtils.random() < settings.spawnSeedProb.val) {
 					PlantNode base = plantComponent.genome.base==null? plantComponent.genome : plantComponent.genome.base;
 					PlantNode nBase = new PlantNode(base, GenePool.brainActiveMutationProb);
 					simulation.addEntity(Factory.createSeed(nBase, pos.x-0.01f, pos.y+.01f));

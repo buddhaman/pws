@@ -38,7 +38,16 @@ public class Console implements Runnable {
 			for(Cmd cmd : commands) {
 				if(cmd.command.equals(split[0])) {
 					//last word in line is argument
-					cmd.executed(split[split.length-1]);
+					if(cmd.type==Type.NONE)
+						cmd.executed(split[split.length-1]);
+					else {
+						if(split.length==1) {
+							System.out.println("missing argument");
+							break;
+						} else{
+							cmd.executed(split[split.length-1]);
+						}
+					}
 				}
 			}
 		}

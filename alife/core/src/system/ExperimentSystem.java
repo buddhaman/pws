@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.Settings;
 
 import component.Bot;
 import genome.PlantNode;
@@ -22,7 +23,7 @@ public class ExperimentSystem extends EntitySystem {
 	private Array<Bot> deadBots = new Array<Bot>();
 	private Array<Bot> candidates = new Array<Bot>();
 	
-	public int nGeneration;
+	public int nGenerations;
 	public int nCandidates;
 	
 	//if set to true, experiment is done
@@ -36,9 +37,9 @@ public class ExperimentSystem extends EntitySystem {
 	public ExperimentSystem(Simulation simulation) {
 		this.simulation = simulation;
 		
-		//TODO: set in settings
-		nGeneration = 200;
+		
 		nCandidates = 20;
+		nGenerations = Settings.getCurrent().nGenerations.val;
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class ExperimentSystem extends EntitySystem {
 		//check all dead bots. Save if generation is high enough and stop simulation. else remove from list
 		for(int i = deadBots.size-1; i>=0; i--) {
 			Bot bot = deadBots.get(i);
-			if(bot.body.genome.generation>=nGeneration) {
+			if(bot.body.genome.generation>=nGenerations) {
 				candidates.add(bot);
 			}
 			deadBots.removeIndex(i);

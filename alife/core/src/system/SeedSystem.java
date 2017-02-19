@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Settings;
 
 import component.Physics;
 import component.Plant;
@@ -61,15 +62,9 @@ public class SeedSystem extends EntitySystem {
 					seedComponent.energy++;
 				}
 				if (seedComponent.energy >= Seed.ENERGY_THRESHOLD) {
-					if(MathUtils.random() < .95f) {
-						//not every seed grows.
-						simulation.addEntity(Factory.createPlant(seedComponent.plantGenome, pos.x, pos.y));
-						simulation.removeEntity(seed);
-						t.energy+=(seedComponent.energy-Plant.MIN_ENERGY);
-					} else {
-						t.energy+=seedComponent.energy;
-						simulation.removeEntity(seed);
-					}
+					simulation.addEntity(Factory.createPlant(seedComponent.plantGenome, pos.x, pos.y));
+					simulation.removeEntity(seed);
+					t.energy+=(seedComponent.energy-Plant.MIN_ENERGY);
 				}
 			}
 		}

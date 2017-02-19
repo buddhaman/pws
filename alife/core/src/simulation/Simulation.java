@@ -18,6 +18,7 @@ import component.Plant;
 import creature.CreatureBody;
 import entity.Factory;
 import genome.GenePool;
+import genome.Genome;
 import genome.PlantNode;
 import physics.Circle;
 import physics.Tile;
@@ -102,18 +103,38 @@ public class Simulation implements EntityListener {
 		
 		camera = Factory.createCamera(worldWidth/2, worldHeight/2, .5f);
 		addEntity(camera);
-		
+		running = true;
+
+		genePool = new GenePool();
+	}
+	
+	public void initRandom() {
 		for(int i = 0; i < 20; i++) {
 			addPlant();
 		}
 		
-		genePool = new GenePool();
-		for(int i = 0; i < settings.botPopulation.val; i++) {
+		for(int i = 0; i < Settings.getCurrent().botPopulation.val; i++) {
 			addRandomBot();
 		}
-		running = true;
 	}
 	
+	public void addPlant(PlantNode gene, int num) {
+		for(int i = 0; i < num; i++) {
+			Vector2 pos = getFreePosition();
+			addEntity(Factory.createPlant(gene, pos.x, pos.y));
+		}
+	}
+	
+	public void addBot(Genome gene, int num) {
+		for(int i = 0; i < num; i++) {
+			Vector2 pos = getFreePosition();
+			addEntity(Factory.createBot(gene, pos.x, pos.y));
+		}
+	}
+	
+	/**
+	 * conserves energy
+	 */
 	public void addPlant() {
 		PlantNode pg = new PlantNode(2,3,null);
 		Vector2 pos = getFreePosition();

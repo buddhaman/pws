@@ -1,13 +1,18 @@
 package simulation;
 
-import genome.Genome;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Json;
+import com.mygdx.game.Settings;
+
+import console.CommandListener;
+import console.Console;
+import console.Console.Type;
+import genome.Genome;
 
 public class CreatureLibrary {
 
@@ -53,6 +58,25 @@ public class CreatureLibrary {
 		return json.fromJson(Genome.class, handle);
 	}
 	
+	public Settings loadSettings(String name) {
+		String path = "/"+EXPERIMENT_FOLDER+"/"+name+".json";
+		FileHandle handle = getHandle(path);
+		if(handle!=null) {
+			return json.fromJson(Settings.class, handle);
+		} else {
+			return null;
+		}
+	}
+	
+	public FileHandle getHandle(String path) {
+		FileHandle file = null;
+		if(Gdx.files.local(path).exists()) {
+			file = Gdx.files.local(path);
+		} else
+			System.out.println(path + " not found");
+		return file;
+	}
+	
 	public void saveGenome(Genome genome, String name) {
 		FileHandle file = Gdx.files.local("/"+CREATURE_FOLDER+"/"+name+".json");
 		file.writeString(json.toJson(genome), false);
@@ -63,8 +87,18 @@ public class CreatureLibrary {
 		file.writeString(json.toJson(data), false);
 	}
 	
-	public ExperimentData loadExperimentData(FileHandle handle) {
-		return json.fromJson(ExperimentData.class, handle);
+	public void saveSettings(Settings settings, String name) {
+		FileHandle file = Gdx.files.local("/"+EXPERIMENT_FOLDER+"/"+name+".json");
+		file.writeString(json.toJson(settings), false);
+	}
+	
+	public synchronized ExperimentData loadExperimentData(String name) {
+		String path = "/" + EXPERIMENT_FOLDER + "/"+name+".json";
+		ExperimentData data = null;
+		FileHandle handle = getHandle(path);
+		if(handle!=null)
+			data = json.fromJson(ExperimentData.class, handle);
+		return data;
 	}
 
 	public List<String> getNames() {

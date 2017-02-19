@@ -33,9 +33,6 @@ import com.mygdx.game.Settings;
 
 import component.Bot;
 import component.Physics;
-import console.CommandListener;
-import console.Console;
-import console.Console.Type;
 import creature.Actuator;
 import creature.CreatureBody;
 import creature.Sensor;
@@ -124,18 +121,9 @@ public class SimulationScreen implements Screen, Resources {
 		creatureLibrary = new CreatureLibrary();
 		Settings.setCurrent(container.getSettings());
 		
-		setupExperiment();
+		startSimulation(false);
 		initUI();
-		addCommands();
-	}
-	
-	public void addCommands() {
-		Console.createCommand("simRestart", Type.NONE, new CommandListener(){
-			public void executed() {
-				System.out.println("starting new simulation ");
-				startSimulation(false);
-			}
-		});
+		new SimulationCommands(this);
 	}
 	
 	public void startSimulation(boolean experiment) {
@@ -685,7 +673,7 @@ public class SimulationScreen implements Screen, Resources {
 		}
 	}
 	
-	public void setupExperiment() {
-		this.experiment = new Experiment(this);
+	public void setupExperiment(String name) {
+		this.experiment = new Experiment(this, name);
 	}
 }

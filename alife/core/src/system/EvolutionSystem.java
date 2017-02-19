@@ -53,9 +53,13 @@ public class EvolutionSystem extends EntitySystem {
 			Tile t = simulation.world.getTileAt(pos.x, pos.y);
 			if (t.energy >= CreatureBody.REPRODUCTION_COST) {
 				t.energy -= CreatureBody.REPRODUCTION_COST;
-				Entity newBot = Factory
-						.createBot(MathUtils.random() < bestProb ? simulation.genePool.getRandomBestGenome(simulation)
-								: simulation.genePool.getRandomGenome(simulation), pos.x, pos.y);
+				
+				Entity newBot;
+				if(MathUtils.random() < bestProb && !simulation.genePool.best.isEmpty()) {
+					newBot = Factory.createBot(simulation.genePool.getRandomBestGenome(simulation), pos.x, pos.y);
+				} else {
+					newBot = Factory.createBot(simulation.genePool.getRandomGenome(simulation), pos.x, pos.y);
+				}
 				simulation.addEntity(newBot);
 			}
 
