@@ -2,7 +2,7 @@ package creature;
 
 public class Sensor {
 	
-	public float[] input;		//input neuron firing probabilities 
+	public float[] input;		//input neuron firing probabilities
 	public int numNeurons;
 	public int startIdx;		//starting index for input neuron to brain
 	

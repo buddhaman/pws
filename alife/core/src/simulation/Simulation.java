@@ -55,9 +55,6 @@ public class Simulation implements EntityListener {
 	private ComponentMapper<Physics> physM = Mappers.physicsMapper;
 	private ComponentMapper<Bot> botM = Mappers.botMapper;
 	private Family botFamily = Family.all(Bot.class).get();
-
-	public int minBots;
-	public int maxBots;
 	
 	public int ticks;
 	public int seconds;
@@ -108,16 +105,6 @@ public class Simulation implements EntityListener {
 		genePool = new GenePool();
 	}
 	
-	public void initRandom() {
-		for(int i = 0; i < 20; i++) {
-			addPlant();
-		}
-		
-		for(int i = 0; i < Settings.getCurrent().botPopulation.val; i++) {
-			addRandomBot();
-		}
-	}
-	
 	public void addPlant(PlantNode gene, int num) {
 		for(int i = 0; i < num; i++) {
 			Vector2 pos = getFreePosition();
@@ -146,8 +133,6 @@ public class Simulation implements EntityListener {
 	}
 	
 	public void updateSettings(Settings settings) {		
-		minBots = settings.minBots.val;
-		maxBots = settings.botPopulation.val;
 		
 		onlineEvolution = settings.onlineEvolution;
 		

@@ -224,13 +224,6 @@ public class SimulationScreen implements Screen, Resources {
 		addSlider(brainSettings, "output connectivity", .1f, 1, 0.01f,
 				settings.outputConnectivity);
 
-		addSlider(worldSettings, "max plants", 0, 200, 2,
-				settings.maxPlants);
-		addSlider(worldSettings, "plant growth", 0, 1, 0.01f,
-				settings.plantGrowProb);
-		addSlider(worldSettings, "minimum creatures", 0,
-				settings.minBots.val, 1,
-				settings.minBots);
 
 		addSlider(creatureSettings, "body mutation rate", 0, 1f, 0.005f,
 				settings.nodeMutationRate);

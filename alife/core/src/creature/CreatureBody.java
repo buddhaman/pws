@@ -51,6 +51,11 @@ public class CreatureBody {
 	public int numHiddenNeurons;
 	public int numOutputNeurons;
 	
+	public int numEyes;
+	public int numSpikes;
+	public int numTouchSensors;
+	public int numMouths;
+	
 	public int energy;
 	public int startHealth = 4000;
 	public int totalEnergyCollected;
@@ -98,6 +103,12 @@ public class CreatureBody {
 		numOutputNeurons = brain.outputSize;
 		numNeurons = brain.size;
 		numSynapses = brain.getSynapseNum();
+		
+		//other interesting values
+		this.numTouchSensors = this.getSensorNum(Sensor.TOUCH);
+		this.numSpikes = this.getActuatorNum(Actuator.SPIKE);
+		this.numMouths = this.getActuatorNum(Actuator.EAT);
+		this.numEyes = this.getSensorNum(Sensor.VISION);
 		
 		//metabolism = .0005f*(numNeurons*5+numSynapses) + visionSensors.size*.005f + touchSensors.size*.005f + .2f;
 		float visionSensors = sensorTypes.get(Sensor.VISION).size;

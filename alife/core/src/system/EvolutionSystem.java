@@ -29,6 +29,7 @@ public class EvolutionSystem extends EntitySystem {
 
 	public int ticksClearList = 25000;
 	public int ticks;
+	public int minBots = 10;
 
 	public float mateSearchRadius = 100;
 
@@ -48,7 +49,7 @@ public class EvolutionSystem extends EntitySystem {
 
 		int botNum = bots.size();
 
-		if (botNum < simulation.minBots) {
+		if (botNum < minBots) {
 			Vector2 pos = simulation.getFreePosition();
 			Tile t = simulation.world.getTileAt(pos.x, pos.y);
 			if (t.energy >= CreatureBody.REPRODUCTION_COST) {
@@ -135,8 +136,6 @@ public class EvolutionSystem extends EntitySystem {
 	}
 
 	private void spawnCopy(CreatureBody creature, int botNum) {
-		if (botNum > simulation.maxBots)
-			return;
 		Genome nGenome = new Genome(creature.genome);
 		creature.energy -= CreatureBody.REPRODUCTION_COST;
 		nGenome.mutate();

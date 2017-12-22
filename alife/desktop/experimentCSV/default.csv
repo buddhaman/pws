@@ -1,0 +1,8 @@
+numEyes,2.0,0.0,1.0,0.0
+numSpikes,0.0,0.0,1.0,1.0
+numTouchSensors,4.0,9.0,19.0,4.0
+numNeurons,40.0,28.0,45.0,29.0
+numSynapses,154.0,85.0,125.0,157.0
+numInputNeurons,25.0,12.0,31.0,7.0
+numHiddenNeurons,11.0,9.0,7.0,17.0
+numOutputNeurons,4.0,7.0,7.0,5.0

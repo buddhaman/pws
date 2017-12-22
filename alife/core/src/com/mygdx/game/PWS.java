@@ -97,6 +97,13 @@ public class PWS extends Game implements PWSContainer {
 				Settings.getCurrent().tileSize.val = arg;
 			}
 		});
+		Console.createCommand("help", Type.NONE, new CommandListener(){
+			@Override
+			public void executed() {
+				Console.printCommands();
+				super.executed();
+			}
+		});
 	}
 	
 	public void startSimulation() {

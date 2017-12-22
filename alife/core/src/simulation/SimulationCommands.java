@@ -1,5 +1,8 @@
 package simulation;
 
+import java.util.List;
+
+import com.badlogic.gdx.files.FileHandle;
 import com.mygdx.game.Settings;
 
 import console.CommandListener;
@@ -38,6 +41,10 @@ public class SimulationCommands {
 		});
 		Console.createCommand("startExperiment", Type.STRING, new CommandListener(){
 			public void executed(String arg) {
+				if(arg.contains("_")) {
+					System.out.println("illegal character '_'");
+					return;
+				}
 				System.out.println(String.format("starting new experiment \"%s\"", arg));
 				screen.setupExperiment(arg);
 			}
@@ -62,6 +69,20 @@ public class SimulationCommands {
 				} else {
 					System.out.println("failed : data==null");
 				}
+			}
+		});
+		Console.createCommand("listExperiments", Type.NONE, new CommandListener(){
+			public void executed() {
+				List<String> names = screen.creatureLibrary.getExperimentNameList();
+				for(int i = 0; i < names.size(); i++) {
+					System.out.println(names.get(i));
+				}
+			}
+		});
+		
+		Console.createCommand("writeStatistics", Type.STRING, new CommandListener(){
+			public void executed(String arg) {
+				screen.creatureLibrary.writeStatistics(arg);
 			}
 		});
 	}

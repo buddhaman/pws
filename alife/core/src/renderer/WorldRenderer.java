@@ -18,6 +18,8 @@ public class WorldRenderer extends Renderer {
 	private AtlasRegion blankRegion;
 	private ComponentMapper<CameraComponent> camM = Mappers.cameraComponentMapper;
 	
+	public static final Color bgColor = new Color(.94f,.94f,.94f,1);
+	
 	public WorldRenderer(Resources res) {
 		super(res);
 		blankRegion = res.findRegion("blankRegion");
@@ -52,7 +54,7 @@ public class WorldRenderer extends Renderer {
 					batch.setColor(Color.BLUE);
 				} else {
 					float tint = .3f+MathUtils.clamp(t.energy/(10*world.tileSize*world.tileSize), 0, .7f);
-					batch.setColor(tint,tint,tint,1);
+					batch.setColor(tint*bgColor.r,tint*bgColor.g,tint*bgColor.b,1);
 				}
 				batch.draw(blankRegion, i*world.tileSize, j*world.tileSize, world.tileSize, world.tileSize);
 			}

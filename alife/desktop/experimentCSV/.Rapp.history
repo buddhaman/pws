@@ -1,0 +1,18 @@
+mydata = read.csv("21oct.csv")
+getwd()
+setwd()
+setwd("/Users/timtrussner/Documents/pws/alife/desktop/experimentCSV")
+getwd()
+mydata = read.csv("21oct.csv")
+mydata
+library(ggplot2);
+mydata(1)
+names(mydata)
+mydata = read.csv("21oct.csv");
+mydata
+stripchart(mydata$numEyes)
+stripchart(mydata$numNeurons)
+stripchart(mydata$numHiddenNeurons)
+plot(mydata$numHiddenNeurons, mydata$numEyes)
+plot(mydata$numSynapses, mydata$numEyes)
+plot(mydata$numInputNeurons, mydata$numHiddenNeurons)

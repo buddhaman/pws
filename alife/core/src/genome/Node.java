@@ -23,7 +23,7 @@ public class Node {
 	public boolean isRootNode;
 	public int type;
 	
-	//data if is eye	TODO:implement evolving eye data
+	//data if is eye
 	public int rays;
 	public float fov;
 	
@@ -96,12 +96,13 @@ public class Node {
 	public float mutateFloat(float g, float mutationProb, float mutationRate, float min, float max) {
 		if(MathUtils.random() < mutationProb) {
 			float val = g + MathUtils.random(-mutationRate, mutationRate);
-			if(val > max) val = 2*max-val;		//wraparound
+			if(val > max) val = 2*max-val;		
 			if(val < min) val = 2*min-val;
 			return val;
 		} else
 			return g;
 	}
+	
 	
 	public void mutateFloatArray(float[] gene, float min, float max, float mutationRate, float mutationProb) {
 		for(int i = 0; i < gene.length; i++) {

@@ -38,17 +38,12 @@ public class Settings {
 	public FloatProperty efficiacyRange;
 	public FloatProperty weightDeviation;
 	
-	public IntProperty botPopulation;
-	public IntProperty minBots;
-
 	public FloatProperty nodeMutationProb;
 	public FloatProperty nodeMutationRate;
 	public FloatProperty brainMutationProb;
 	public FloatProperty brainMutationRate;
 	
 	public FloatProperty brainActiveMutationProb;
-	
-	public IntProperty maxPlants;
 	
 	public IntProperty eatPlantFactor;
 	public IntProperty eatCorpseFactor;
@@ -97,8 +92,6 @@ public class Settings {
 		settings.hiddenConnectivity = new FloatProperty(.2f);
 		settings.outputConnectivity = new FloatProperty(.4f);
 		
-		settings.botPopulation = new IntProperty(100);
-		settings.minBots = new IntProperty(20);
 		settings.minPlants = new IntProperty(1);
 		
 		settings.maxMouths = new IntProperty(3);
@@ -106,7 +99,6 @@ public class Settings {
 		settings.rayNum = new IntProperty(3);
 		
 		settings.maxHiddenSize = new IntProperty(35);
-		settings.maxPlants = new IntProperty(90);
 		settings.newPlantProb = new FloatProperty(1f);
 		settings.plantGrowProb = new FloatProperty(.04f);
 		

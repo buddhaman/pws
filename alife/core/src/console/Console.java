@@ -42,7 +42,7 @@ public class Console implements Runnable {
 						cmd.executed(split[split.length-1]);
 					else {
 						if(split.length==1) {
-							System.out.println("missing argument");
+							print("missing argument");
 							break;
 						} else{
 							cmd.executed(split[split.length-1]);
@@ -52,8 +52,19 @@ public class Console implements Runnable {
 			}
 		}
 
-		System.out.print(parserArgs);
+		print(parserArgs);
 		input.close();
+	}
+	
+	public static void print(String text) {
+		System.out.println(text);
+	}
+	
+	public static void printCommands() { 
+		for(int i = 0; i < commands.size; i++) {
+			Cmd command = commands.get(i);
+			print(command.command + " [" + command.type + "]");
+		}
 	}
 	
 	public static void createCommand(String command, Type argType, CommandListener listener) {
